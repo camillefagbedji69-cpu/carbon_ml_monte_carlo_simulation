@@ -1,59 +1,60 @@
-# Carbon Prediction & Resilience Evaluation via Monte Carlo Simulation
+# 🌍 Carbon Prediction & Resilience Evaluation
 
-## 📌 Context
+### *Quantifying Ecological Stability via Monte Carlo Simulations & Explainable AI*
 
-Following my [previous research](https://github.com/camillefagbedji69-cpu/carbon_ml_without_lulc), this project aims to quantify the **ecological resilience** of carbon stocks. Beyond mere prediction, this study uses a stochastic approach to evaluate how spatial units respond to extreme environmental variations.
+## 📌 Overview
 
-## ⚙️ Methodology
+Building upon [previous research](https://github.com/camillefagbedji69-cpu/carbon_ml_without_lulc), this project moves beyond static carbon stock prediction. We introduce a **stochastic stress-test framework** to evaluate how spatial units respond to extreme environmental perturbations, providing a robust metric for **Ecological Resilience**.
 
-* **Data & Features**: Includes Tree Proportion (`tree_prop`), NDVI, NDWI, LST, and Precipitation.
-* **Spatial Validation**: Implementation of **Spatial K-Fold** cross-validation to prevent data leakage due to spatial autocorrelation.
-* **Predictive Modeling**: Comparison of four architectures: Linear Regression, Random Forest, XGBoost, and Gradient Boosting.
-* **Monte Carlo Simulation (Resilience Stress-Test)**:
-* **Iterations**: 10,000 simulations.
-* **Perturbation**: $\pm 20\%$ variation applied to the top 3 drivers identified by SHAP.
-* **Vulnerability Index ($V$)**: Calculated as the relative loss between the baseline and the simulated scenario:
+## ⚙️ Methodology & Framework
+
+### 1. Data Integration
+
+* **Biophysical Drivers**: Tree Proportion (`tree_prop`), NDVI, NDWI.
+* **Climatic Variables**: Land Surface Temperature (LST) and Precipitation.
+* **Spatial Integrity**: Implementation of **Spatial K-Fold** cross-validation to mitigate data leakage caused by spatial autocorrelation.
+
+### 2. Resilience Stress-Test (Monte Carlo)
+
+To simulate ecosystem vulnerability, we perform 10,000 iterations applying a $\pm 20\%$ perturbation to the top 3 drivers identified by **SHAP**.
+
+* **Vulnerability Index ($V$)**:
 
 $$V = \frac{Y_{baseline} - Y_{simulated}}{Y_{baseline}}$$
 
 
-* **Pessimistic Scenario**: Selection of the **10th percentile** of results to model high-stress conditions.
-* **Resilience Index**: Normalization (0 to 1) of the vulnerability to map the capacity of each unit to maintain its carbon stock.
+* **Resilience Index ($R$)**:
 
-## 📊 Results
+$$R = 1 - V$$
 
-### 1. Model Performance
 
-The tree-based models (RF and XGBoost) demonstrate superior performance, capturing the complex non-linearities of the ecosystem.
+* **Risk Modeling**: Selection of the **10th percentile** (pessimistic scenario) to map the minimum guaranteed capacity of units to maintain carbon stocks.
 
-| Models | $R^2$ | RMSE (tC/ha) |
+## 📊 Benchmark & Insights
+
+### Model Performance
+
+Tree-based architectures significantly outperform linear models in capturing non-linear ecosystem dynamics.
+
+| Model | $R^2$ | RMSE (tC/ha) |
 | --- | --- | --- |
 | **Random Forest** | **0.75** | **196.63** |
 | **XGBoost** | **0.75** | **199.32** |
 | Gradient Boosting | 0.64 | 237.65 |
 | Linear Regression | 0.40 | 306.29 |
 
-### 2. Sensitivity Analysis (SHAP)
+### Sensitivity Analysis (SHAP)
 
-The importance ranking reveals that physical structure (`tree_prop`) and water availability remain the primary controllers of the system.
+The ranking confirms that physical structure and water availability are the primary regulators of carbon stability.
 
-| Variables | Mean SHAP Value (Absolute) |
-| --- | --- |
-| **Tree Proportion** | **187.04** |
-| **Precipitation** | **56.99** |
-| **NDWI** | **49.96** |
-| LST | 7.47 |
-| NDVI | 6.63 |
+| Variable | Mean SHAP (Absolute) | Impact Role |
+| --- | --- | --- |
+| **Tree Proportion** | **187.04** | Structural Baseline |
+| **Precipitation** | **56.99** | Climatic Driver |
+| **NDWI** | **49.96** | Hydrological Health |
 
-### 3. Resilience Assessment
+## 🚀 "AI for Science" & Policy Impact
 
-The normalized resilience index (Mean: 0.38) indicates that under a pessimistic scenario (10th percentile), most spatial units face significant vulnerability.
-
-* **High Resilience (1.0)**: Units capable of maintaining carbon stocks despite climate fluctuations.
-* **Low Resilience (0.0)**: Units highly sensitive to changes in tree cover and rainfall.
-
-## 🚀 Perspectives & "AI for Science" Impact
-
-1. **Decision Support**: This index allows for the prioritization of conservation zones based on their stability, not just their current stock.
-2. **Climate Risk Mapping**: Moving from static maps to dynamic "risk-aware" dashboards for Beninese forest management.
-3. **Stochastic Forecasting**: Integration of Monte Carlo methods to provide confidence intervals for carbon credit markets.
+* **Strategic Conservation**: Prioritizing zones based on **stability** rather than just current biomass.
+* **Risk-Aware Dashboards**: Transitioning from static maps to dynamic tools for forest management in Benin.
+* **Carbon Markets**: Providing confidence intervals and "stress-tested" data for more reliable carbon credit valuation.
