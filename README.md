@@ -16,7 +16,7 @@ Building upon [previous research](https://github.com/camillefagbedji69-cpu/carbo
 
 ### 2. Resilience Stress-Test (Monte Carlo)
 
-To simulate ecosystem vulnerability, we perform 10,000 iterations applying a $\pm 20\%$ perturbation to the top 3 drivers identified by **SHAP**.
+To simulate ecosystem vulnerability, we perform 10,000 iterations applying a $\pm 200\%$ perturbation to the top 3 drivers identified by **SHAP**.
 
 * **Vulnerability Index ($V$)**:
 
@@ -47,12 +47,21 @@ Tree-based architectures significantly outperform linear models in capturing non
 
 The ranking confirms that physical structure and water availability are the primary regulators of carbon stability.
 
-| Variable | Mean SHAP (Absolute) | Impact Role |
-| --- | --- | --- |
-| **Tree Proportion** | **187.04** | Structural Baseline |
-| **Precipitation** | **56.99** | Climatic Driver |
-| **NDWI** | **49.96** | Hydrological Health |
+| Variable | Mean SHAP (Absolute) |
+| --- | --- |
+| **Tree Proportion** | **187.04** |
+| **Precipitation** | **56.99** | 
+| **NDWI** | **49.96** |
 
+## 🛡️ Resilience Assessment & Stress-Testing
+
+The resilience index (Min: **0.8657**, Mean: **0.8676**, Max: **0.9251**) provides a quantitative measure of ecosystem stability under a **10th percentile pessimistic scenario**.
+
+### 1. Key Metrics & Interpretation
+
+* **High Resilience ($\approx 1.0$)**: Spatial units capable of maintaining over 90% of their carbon stocks even under severe climatic fluctuations.
+* **Low Resilience ($< 0.85$)**: Units highly sensitive to changes in tree cover and rainfall; these are priority zones for adaptive management.
+  
 ## 🚀 "AI for Science" & Policy Impact
 
 * **Strategic Conservation**: Prioritizing zones based on **stability** rather than just current biomass.
